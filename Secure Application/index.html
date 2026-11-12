@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StegoSafe — Secure Image Steganography</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <span class="lock-icon">🔒</span>
+        <h1>StegoSafe</h1>
+        <span class="badge">LSB + AES-256</span>
+      </div>
+      <p class="tagline">Hide &amp; recover secret messages inside images — all in your browser</p>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" id="tabHide" role="tab" aria-selected="true" aria-controls="panelHide">🛡️ Hide Message</button>
+      <button class="tab" id="tabExtract" role="tab" aria-selected="false" aria-controls="panelExtract">🔍 Extract Message</button>
+    </nav>
+
+    <!-- ================= HIDE PANEL ================= -->
+    <section id="panelHide" class="panel active" role="tabpanel" aria-labelledby="tabHide">
+      <div class="grid-2col">
+        <div class="card">
+          <h2>1. Cover Image &amp; Message</h2>
+          <div class="file-input-group">
+            <label for="coverImageInput" class="file-label">📁 Choose cover image (PNG, JPEG)</label>
+            <input type="file" id="coverImageInput" accept="image/png,image/jpeg,image/jpg,image/webp">
+            <div class="file-meta" id="coverFileInfo">No file selected</div>
+          </div>
+          <div class="preview-box" id="coverPreviewContainer">
+            <img id="coverPreview" alt="Cover image preview" style="display:none;">
+            <span class="placeholder-text" id="coverPlaceholder">Image preview will appear here</span>
+          </div>
+          <label for="secretMessage">🔐 Secret message</label>
+          <textarea id="secretMessage" rows="4" placeholder="Enter the text you want to hide..."></textarea>
+          <label for="hidePassword">🔑 Optional encryption password</label>
+          <input type="password" id="hidePassword" placeholder="Leave blank for no encryption" autocomplete="new-password">
+          <div class="action-row">
+            <button id="hideBtn" class="btn primary">🛡️ Hide &amp; Generate</button>
+            <button id="resetHideBtn" class="btn secondary">Reset</button>
+          </div>
+          <div id="hideStatus" class="status-msg" role="status"></div>
+        </div>
+
+        <div class="card">
+          <h2>2. Stego Image Output</h2>
+          <div class="preview-box" id="stegoPreviewContainer">
+            <img id="stegoPreview" alt="Stego image preview" style="display:none;">
+            <span class="placeholder-text" id="stegoPlaceholder">Generated stego image will appear here</span>
+          </div>
+          <div class="file-meta" id="stegoFileInfo"></div>
+          <button id="downloadBtn" class="btn success" disabled>⬇️ Download PNG</button>
+          <p class="hint">⚠️ Save as PNG. Resizing, recompression, or JPEG conversion destroys hidden data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXTRACT PANEL ================= -->
+    <section id="panelExtract" class="panel" role="tabpanel" aria-labelledby="tabExtract">
+      <div class="grid-2col">
+        <div class="card">
+          <h2>1. Stego Image</h2>
+          <div class="file-input-group">
+            <label for="stegoImageInput" class="file-label">📁 Choose stego image (PNG)</label>
+            <input type="file" id="stegoImageInput" accept="image/png,image/jpeg,image/jpg,image/webp">
+            <div class="file-meta" id="extractFileInfo">No file selected</div>
+          </div>
+          <div class="preview-box" id="extractPreviewContainer">
+            <img id="extractPreview" alt="Stego image preview" style="display:none;">
+            <span class="placeholder-text" id="extractPlaceholder">Uploaded image preview</span>
+          </div>
+          <label for="extractPassword">🔑 Decryption password (if encrypted)</label>
+          <input type="password" id="extractPassword" placeholder="Enter password if message is encrypted" autocomplete="off">
+          <div class="action-row">
+            <button id="extractBtn" class="btn primary">🔍 Extract Message</button>
+            <button id="clearExtractBtn" class="btn secondary">Clear</button>
+          </div>
+          <div id="extractStatus" class="status-msg" role="status"></div>
+        </div>
+
+        <div class="card">
+          <h2>2. Recovered Message</h2>
+          <div class="recovered-box">
+            <textarea id="recoveredMessage" rows="8" readonly placeholder="Recovered message will appear here..."></textarea>
+          </div>
+          <button id="copyRecoveredBtn" class="btn secondary" disabled>📋 Copy to clipboard</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>🔒 All processing happens locally. No images, messages, or passwords leave your device.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
