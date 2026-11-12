@@ -594,31 +594,8 @@ Following the Aptech eProject laddered methodology, build and verify the applica
 
 ---
 
-## 8. Quick-Start Setup & Environment Configuration
+## 8. Setup and Run
 
-### 8.1 Environment Variables (`server/.env`)
-
-```ini
-NODE_ENV=development
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/pulseforge_fitness
-JWT_ACCESS_SECRET=replace_with_64_byte_hex_secret_key_for_access_tokens
-JWT_REFRESH_SECRET=replace_with_64_byte_hex_secret_key_for_refresh_tokens
-JWT_ACCESS_EXPIRES_IN=15m
-JWT_REFRESH_EXPIRES_IN=7d
-CLIENT_ORIGIN=http://localhost:5173
-```
-
-### 8.2 Running the Full MERN Stack Locally
-
-```bash
-# 1. Install dependencies for both backend and frontend
-cd server && npm install
-cd ../client && npm install
-
-# 2. Seed initial sample workouts, meals, progress logs, and community athletes
-cd ../server && npm run seed
-
-# 3. Start backend API (port 5000) and Vite React client (port 5173)
-npm run dev
-```
+See [steps.md](./steps.md) for the prerequisites, environment configuration,
+Windows commands to install and run the client and API, optional demo-data
+seeding, and verification steps.
